@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laceskinscence - Appointment</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: white;
+        color: black;
+        text-align: left;
+      }
+      .nav-bar {
+        background: #e3d3b6;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .logo img {
+        height: 50px;
+      }
+      .nav-bar ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+      }
+      .nav-bar ul li {
+        margin: 0 15px;
+      }
+      .nav-bar ul li a {
+        text-decoration: none;
+        color: black;
+      }
+      .login-btn {
+        background: #9a6248;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .appointment-section {
+        background: #fff;
+        padding: 30px;
+        margin: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .appointment-section form {
+        display: flex;
+        flex-direction: column;
+        max-width: 400px;
+        margin: auto;
+      }
+      .appointment-section input,
+      .appointment-section button {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .appointment-section select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 16px;
+  appearance: none; /* Removes default dropdown styling */
+}
+      .appointment-section button {
+        background: #9a6248;
+        color: white;
+        cursor: pointer;
+      }
+      .appointment-section button:hover {
+        background: #9c7a94;
+      }
+      #sub-service-container {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-bar">
+        <div class="logo">
+          <img src="logo.png" alt="Belo Logo" />
+        </div>
+        <nav>
+          <ul>
+            <li><a href="FrontPage.html">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Offers</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </nav>
+        <button class="login-btn" onclick="location.href='login.html'">
+          Sign In
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="appointment-header">
+        <h2 style="text-align: center;">Clinic Appointment Booking</h2>
+        <p style="text-align: center;">
+          Please fill up this form and we’ll get in touch with you as soon as your schedule is
+          confirmed. 
+        </p>
+      </section>
+      <section class="appointment-section">
+        <form id="appointment-form">
+          <label for="first-name">First Name:</label>
+          <input type="text" id="first-name" name="first-name" required />
+
+          <label for="last-name">Last Name:</label>
+          <input type="text" id="last-name" name="last-name" required />
+
+          <label for="contact-number">Contact Number:</label>
+          <input type="text" id="contact-number" name="contact-number" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="date">Appointment Date:</label>
+          <input type="date" id="date" name="date" required />
+
+          <label for="time">Appointment Time:</label>
+          <input type="time" id="time" name="time" required />
+
+          <label for="service">Select Service:</label>
+          <select id="service" name="service" required onchange="updateSubServices()">
+            <option value=""></option>
+            <option value="Facial">Facial</option>
+            <option value="Specialized Treatments">Specialized Treatments</option>
+            <option value="Eyebrow Treatment">Eyebrow Treatment</option>
+            <option value="Non Surgical Body Contouring">Non Surgical Body Contouring</option>
+            <option value="Threading">Threading</option>
+            <option value="Warts Removal">Warts Removal</option>
+            <option value="Eyelash Extension">Eyelash Extension</option>
+            <option value="Nails">Nails</option>
+            <option value="Waxing Hair Removal">Waxing Hair Removal</option>
+            <option value="Semi Permanent Make up">Semi Permanent Make up</option>
+            <option value="Gluta Services">Gluta Services</option>
+            <option value="Gluta Boosters">Gluta Boosters</option>
+            <option value="Massage Treatment">Massage Treatment</option>
+            <option value="Body care">Body care</option>
+            <option value="Laser Treatments">Laser Treatments</option>
+            <option value="Advance Facial Treatment">Advance Facial Treatment</option>
+          </select>
+
+          <div id="sub-service-container">
+            <label for="sub-service">Select Specific Service:</label>
+            <select id="sub-service" name="sub-service">
+              <option value=""></option>
+            </select>
+          </div>
+
+          <div id="sub-sub-service-container">
+            <label for="sub-sub-service">Select Specific Treatment:</label>
+            <select id="sub-sub-service" name="sub-sub-service">
+              <option value=""></option>
+            </select>
+          </div>
+          
+          <button type="submit">Book Appointment</button>
+        </form>
+        <p id="confirmation-message"></p>
+      </section>
+    </main>
+    <script>
+   function updateSubServices() {
+        const services = {
+          "Facial": ["Student Facial - ₱450", "Laceskinscence - ₱550"],
+          "Specialized Treatments": ["Diamond Peel - ₱650", "Photon Theralight Theraphy - ₱950", "Hydra Facial - ₱999"],
+          "Eyebrow Treatment": ["Brow Lamination - ₱800", "Lashlift w/ Semi permanent Mascara - ₱800"],
+          "Non Surgical Body Contouring": ["Liposlim", "Cyro"],
+          "Threading": ["Full Face - ₱350", "Upper Lip & Lower Lip - 200", "Eyebrows - ₱200", "Underarm - ₱300"],
+          "Warts Removal":["Face Area - ₱2,500", "Face & Neck Area - ₱3,500", "Per Piece - ₱400"],
+          "Eyelash Extension": ["Classic Natural Look - ₱800", "Hybrid Mascara Effect/Cat Eye - ₱1,300", "Volume - ₱1,600", "Mega Volume - ₱2,000"],
+          "Nails":["Mani", "Pedi"],
+          "Waxing Hair Removal": ["Sugaring", "Starpil"],
+          "Semi Permanent Make up": [" Ultimate Brows(6d Microblading) - ₱8,000", "Micropinning(Comination Brows) - ₱10,000", "Nanopinning(Ombre Powdered Brows) - ₱10,000", "Lip Creme - ₱9,000", "Eyeliner(Upper/Lower) Classic - ₱3,500", "Eyeliner(Upper/Lower) Winged - ₱5,000"],
+          "Gluta Services": ["Ducess: ₱1,000", "Princess - ₱1,500", "Queens - ₱2,000", "Cinderella Drip - ₱2,500", "Show White - ₱3,000"],
+          "Gluta Boosters": ["Stemcell - ₱1,000", "L Carnitine - ₱1,000", "B Complex - ₱1,000", "Placenta/Collagen - ₱1,000"],
+          "Massage Treatment":["Hand Massage(30 minutes) - ₱400", "Foot Massage(30 minutes) - ₱400", "Therapeutic Massage - ₱650", "Signature Massage w/ Hot Stone - ₱750", "Signature Massage w/ Ventusa - ₱750", "Deep Tissue Massage - ₱750"],
+          "Body care": ["Ear Spa - ₱400", "Eye Bag Removal - ₱600", "Full Body Scrub(1hr and 30 minutes) - ₱1,200", "Fully Body Scrub w/ Bleaching - ₱1,500", "Bare Luxury Hand/Footspa - ₱850", "Foot Spa w/ Combination Foot Massage - ₱550", "Hand Paraffin Wax - ₱350"],
+          "Laser Treatments": ["Skin Rejuvenation - ₱499", "Underarm Whitening with Glycolic - ₱1,000", "Underarm Whitening with  Cryo Theraphy - ₱1,200", "Vajacial - ₱1,500", "Underam Carbon Pico Laser - ₱1,500", "Carbon Laser - ₱1,900", "Vajacial with Laser Whitening - ₱2,000", "Vajacial with Laser Whitening & Diode Hair Removal - ₱2,500", "Laser whitening - ₱2,500", "Laser Tattoo Removal - ₱2,500"],
+          "Advance Facial Treatment": ["Hifu V-lift(7D)"]
+
+
+
+        
+        };
+
+        let serviceSelect = document.getElementById("service").value;
+        let subServiceContainer = document.getElementById("sub-service-container");
+        let subServiceSelect = document.getElementById("sub-service");
+
+        subServiceSelect.innerHTML = '<option value=""></option>';
+        document.getElementById("sub-sub-service-container").style.display = "none"; 
+
+        if (services[serviceSelect]) {
+          subServiceContainer.style.display = "block";
+          services[serviceSelect].forEach(sub => {
+            let option = new Option(sub, sub);
+            subServiceSelect.add(option);
+          });
+
+          subServiceSelect.onchange = updateSubSubServices;
+        } else {
+          subServiceContainer.style.display = "none";
+          document.getElementById("sub-sub-service-container").style.display = "none";
+        }
+      }
+
+      function updateSubSubServices() {
+        const subServices = {
+          "Liposlim": ["Face/Double - ₱499", "Bra Line - ₱599", "Arms - ₱599", "LoveHandles/Flanks/Inner/Outer Thigh - ₱699", "Upper/Lower Abdomen - ₱899", "Unli Package for 3 months 2 areas per session - 13,500", "Unli Package for 3 months 2 parts per serssion - P13,500"],
+          "Cyro": ["Face/Double - ₱599", "Bra Line - ₱699", "Arms - ₱699", "LoveHandles/Flanks/Inner/Outer Thigh - ₱799", "Upper/Lower Abdomen - ₱1100", "Unli Package for 3 months 2 areas per session - 15,000", "Unli Package for 3 months 2 parts per serssion - P15,000"],
+          "Mani":["Mani/Pedi Cleaning - ₱150", "Morgan Taylor - ₱250", "Zaya - ₱250", "Glamour Nail Lacquer/Nail Tech Polish - ₱250", "Paris Hilton - ₱250", "Orly Regular Polish - ₱250", "Orly (Gel) - ₱600", "Cathy Kathy Europe Nail Polish - ₱600", "Gelish - ₱600", "Kiara Sky Dip Powder - ₱800", "Soft Gel Nail Extension - ₱1,500", "Only Builder Extension - ₱1,500", "Kiara Sky Dip Power w/Nails Extension - ₱1,800", "Poly Gel - ₱2,000"],
+          "Pedi":["Mani/Pedi Cleaning - ₱180", "Morgan Taylor - ₱270", "Zaya - ₱270", "Glamour Nail Lacquer/Nail Tech Polish - ₱270", "Paris Hilton - ₱270", "Orly Regular Polish - ₱270", "Orly (Gel) - ₱700", "Cathy Kathy Europe Nail Polish - ₱700", "Gelish - ₱700", "Kiara Sky Dip Powder - ₱900", "Soft Gel Nail Extension - ₱2,000", "Only Builder Extension - ₱2,000", "Kiara Sky Dip Power w/Nails Extension - ₱1,800", "Poly Gel - ₱2,500"],
+          "Sugaring":["Upper Abs - ₱250", "Lower Lip - ₱250", "Face - ₱380", "Underarm - ₱350", "Arm - ₱400", "Chest/Back/Bikini Area - ₱800", "Brazzilian - ₱899", "Half Legs - ₱800", "Full Legs - ₱1,500"],
+          "Starpil":["Upper Abs - ₱250", "Lower Lip - ₱250", "Face - ₱380", "Underarm - ₱350", "Arm - ₱400", "Chest/Back/Bikini Area - ₱800", "Brazzilian - ₱899", "Half Legs - ₱800", "Full Legs - ₱1,500"],
+          "Hifu V-lift(7D)":[" Double Chin - ₱5,000", "Arms - ₱6,000", "Whole Face - ₱8,000", "Thighs - ₱8,000", "Stomach - ₱8,000"]
+          
+
+        };
+
+        let subServiceSelect = document.getElementById("sub-service").value;
+        let subSubServiceContainer = document.getElementById("sub-sub-service-container");
+        let subSubServiceSelect = document.getElementById("sub-sub-service");
+
+        subSubServiceSelect.innerHTML = '<option value=""></option>';
+
+        if (subServices[subServiceSelect]) {
+          subSubServiceContainer.style.display = "block";
+          subServices[subServiceSelect].forEach(sub => {
+            let option = new Option(sub, sub);
+            subSubServiceSelect.add(option);
+          });
+        } else {
+          subSubServiceContainer.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
+
